@@ -4,6 +4,7 @@ from Wheat_Class import *
 from Chicken_Class import *
 from Cow_Class import *
 from Sheep_Class import *
+import random
 
 class Field:
     def __init__(self,max_a,max_c):
@@ -82,6 +83,47 @@ class Field:
                         feed = feed + 1
                 animal.Grow(feed,water)
 
+def manual_grow(field):
+    valid = False
+    while not valid:
+        try:
+            light = int(input("please enter the light value(1-10): "))
+            if 1 <= light <= 10:
+                valid = True
+            else:
+                print("Value not valid. Please enter your value again")
+        except ValueError:
+            print("Value not valid. Please enter your value again")
+    valid = False
+    while not valid:
+        try:
+            water = int(input("please enter the light value(1-10): "))
+            if 1 <= water <= 10:
+                valid = True
+            else:
+                print("Value not valid. Please enter your value again")
+        except ValueError:
+            print("Value not valid. Please enter your value again")
+    valid = False
+    while not valid:
+        try:
+            food = int(input("please enter the light value(1-10): "))
+            if 1 <= food <= 100:
+                valid = True
+            else:
+                print("Value not valid. Please enter your value again")
+        except ValueError:
+            print("Value not valid. Please enter your value again")
+
+    field.grow(light,food,water)
+
+def auto_grow(field,days):
+    for day in range(days):
+        light = random.randint(1,10)
+        water = random.randint(1,10)
+        food = random.randint(1,100)
+        field.grow(light,food,water)
+
 def display_crops(crop_list):
     print("\nCrops in the feild:")
     pos = 1
@@ -125,3 +167,20 @@ def remove_animal_from_field(field):
     display_animals(field._animals)
     selected_animal = select_animal(len(field._animals))
     return field.remove(selected_animal)
+
+def display_crop_menu():
+    print("\nWhich crop type would you like to add?\n")
+    print("1. Potato\n2. Wheat\n3. Carrot\n\n0. Return to the main menu\n")
+
+def display_animal_menu():
+    print("\nWhich animal type would you like to add?\n")
+    print("1. Cow\n2. Sheep\n3. Chicken\n\n0. Return to the main menu\n")
+
+def display_main_menu():
+    print("\nThis is the main menu\nPlease choos from the options below\n")
+    print("1. Plant a new crop\n2. Harvest a crop\n")
+    print("3. Add an animal\n4. Remove an animal\n")
+    print("5. Grow field manually over 1 day\n6. Grow field automatically over 30 days\n")
+    print("7. Report field status\n\n8. Exit program\n")
+#14.27
+    
